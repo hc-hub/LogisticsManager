@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{91956BB2-F513-4E11-B900-D5F701FACBC6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LogisticsManager</RootNamespace>
+    <AssemblyName>LogisticsManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AspNetPager, Version=7.5.1.0, Culture=neutral, PublicKeyToken=fb0a0fe055d40fd4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AspNetPager.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.0.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.0.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.0.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.0.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.0.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AddCarriers.aspx" />
+    <Content Include="AddDriver.aspx" />
+    <Content Include="AddGoods.aspx" />
+    <Content Include="AddTruck.aspx" />
+    <Content Include="AddTruckTeam.aspx" />
+    <Content Include="AddUserInfo.aspx" />
+    <Content Include="bin\AspNetPager.dll" />
+    <Content Include="bin\AspNetPager.xml" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\LogisticsManager.dll" />
+    <Content Include="bin\LogisticsManager.pdb" />
+    <Content Include="bin\LogisticsManagerBLL.dll" />
+    <Content Include="bin\LogisticsManagerBLL.pdb" />
+    <Content Include="bin\LogisticsManagerDAL.dll" />
+    <Content Include="bin\LogisticsManagerDAL.pdb" />
+    <Content Include="bin\LogisticsManagerModel.dll" />
+    <Content Include="bin\LogisticsManagerModel.pdb" />
+    <Content Include="bin\Microsoft.AI.Agent.Intercept.dll" />
+    <Content Include="bin\Microsoft.AI.DependencyCollector.dll" />
+    <Content Include="bin\Microsoft.AI.DependencyCollector.xml" />
+    <Content Include="bin\Microsoft.AI.PerfCounterCollector.dll" />
+    <Content Include="bin\Microsoft.AI.ServerTelemetryChannel.dll" />
+    <Content Include="bin\Microsoft.AI.ServerTelemetryChannel.xml" />
+    <Content Include="bin\Microsoft.AI.Web.dll" />
+    <Content Include="bin\Microsoft.AI.Web.xml" />
+    <Content Include="bin\Microsoft.AI.WindowsServer.dll" />
+    <Content Include="bin\Microsoft.AI.WindowsServer.xml" />
+    <Content Include="bin\Microsoft.ApplicationInsights.dll" />
+    <Content Include="bin\Microsoft.ApplicationInsights.xml" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\zh-Hans\EntityFramework.resources.dll" />
+    <Content Include="CarriageTeam.aspx" />
+    <Content Include="CarriageTruck.aspx" />
+    <Content Include="CarriersDetils.aspx" />
+    <Content Include="CarriersManager.aspx" />
+    <Content Include="ChangePossWord.aspx" />
+    <Content Include="CostMaintenance.aspx" />
+    <Content Include="css\GridViewCss.css" />
+    <Content Include="css\StyleButton.css" />
+    <Content Include="css\Table2.css" />
+    <Content Include="DriverBindTruck.aspx" />
+    <Content Include="DriverInfo.aspx" />
+    <Content Include="HistoryCarriage.aspx" />
+    <Content Include="img\logo1.png" />
+    <Content Include="Index.aspx" />
+    <Content Include="js\calendar.js" />
+    <Content Include="js\jquery-3.2.1.js" />
+    <Content Include="obj\Debug\LogisticsManager.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\LogisticsManager.dll" />
+    <Content Include="obj\Debug\LogisticsManager.pdb" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\thumbs.db" />
+    <Content Include="bin\ApplicationInsights.config" />
+    <Content Include="bin\LogisticsManager.dll.config" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="obj\Debug\build.force" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\LogisticsManager.csprojResolveAssemblyReference.cache" />
+    <Content Include="Login1.ashx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\css.css" />
+    <Content Include="Global.asax" />
+    <Content Include="img\171.png" />
+    <Content Include="img\20150212154319.jpg" />
+    <Content Include="img\glyphicons-halflings-white.png" />
+    <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="img\input_icon_1.png" />
+    <Content Include="img\input_icon_2.png" />
+    <Content Include="img\left.png" />
+    <Content Include="img\left2.png" />
+    <Content Include="img\left_bg.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\select.png" />
+    <Content Include="img\Switch.png" />
+    <Content Include="img\Switch2.png" />
+    <Content Include="img\tit.png" />
+    <Content Include="img\top.png" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery1.9.0.min.js" />
+    <Content Include="js\laydate\laydate.js" />
+    <Content Include="js\laydate\need\laydate.css" />
+    <Content Include="js\laydate\skins\dahong\icon.png" />
+    <Content Include="js\laydate\skins\dahong\laydate.css" />
+    <Content Include="js\laydate\skins\danlan\icon.png" />
+    <Content Include="js\laydate\skins\danlan\laydate.css" />
+    <Content Include="js\laydate\skins\default\icon.png" />
+    <Content Include="js\laydate\skins\default\laydate.css" />
+    <Content Include="js\laydate\skins\molv\icon.png" />
+    <Content Include="js\laydate\skins\molv\laydate.css" />
+    <Content Include="js\laydate\skins\qianhuang\icon.png" />
+    <Content Include="js\laydate\skins\qianhuang\laydate.css" />
+    <Content Include="js\laydate\skins\yahui\icon.png" />
+    <Content Include="js\laydate\skins\yahui\laydate.css" />
+    <Content Include="js\laydate\skins\yalan\icon.png" />
+    <Content Include="js\laydate\skins\yalan\laydate.css" />
+    <Content Include="js\sdmenu.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="ReceiveCarriers.aspx" />
+    <Content Include="SchedulingManager.aspx" />
+    <Content Include="SchedulingTruck.aspx" />
+    <Content Include="obj\scripts\ai.0.22.9-build00167.js" />
+    <Content Include="obj\scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="SysLog.aspx" />
+    <Content Include="TruckInfo.aspx" />
+    <Content Include="TruckManager.aspx" />
+    <Content Include="TruckTeamManager.aspx" />
+    <Content Include="UpdateCarriers.aspx" />
+    <Content Include="UpdateDriver.aspx" />
+    <Content Include="UpdateTruck.aspx" />
+    <Content Include="UserInfo.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="开票界面.html" />
+    <Content Include="登录.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddCarriers.aspx.cs">
+      <DependentUpon>AddCarriers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddCarriers.aspx.designer.cs">
+      <DependentUpon>AddCarriers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddDriver.aspx.cs">
+      <DependentUpon>AddDriver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDriver.aspx.designer.cs">
+      <DependentUpon>AddDriver.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddGoods.aspx.cs">
+      <DependentUpon>AddGoods.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddGoods.aspx.designer.cs">
+      <DependentUpon>AddGoods.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddTruck.aspx.cs">
+      <DependentUpon>AddTruck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddTruck.aspx.designer.cs">
+      <DependentUpon>AddTruck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddTruckTeam.aspx.cs">
+      <DependentUpon>AddTruckTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddTruckTeam.aspx.designer.cs">
+      <DependentUpon>AddTruckTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddUserInfo.aspx.cs">
+      <DependentUpon>AddUserInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUserInfo.aspx.designer.cs">
+      <DependentUpon>AddUserInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CarriageTeam.aspx.cs">
+      <DependentUpon>CarriageTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CarriageTeam.aspx.designer.cs">
+      <DependentUpon>CarriageTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CarriageTruck.aspx.cs">
+      <DependentUpon>CarriageTruck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CarriageTruck.aspx.designer.cs">
+      <DependentUpon>CarriageTruck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CarriersDetils.aspx.cs">
+      <DependentUpon>CarriersDetils.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CarriersDetils.aspx.designer.cs">
+      <DependentUpon>CarriersDetils.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CarriersManager.aspx.cs">
+      <DependentUpon>CarriersManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CarriersManager.aspx.designer.cs">
+      <DependentUpon>CarriersManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePossWord.aspx.cs">
+      <DependentUpon>ChangePossWord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePossWord.aspx.designer.cs">
+      <DependentUpon>ChangePossWord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CostMaintenance.aspx.cs">
+      <DependentUpon>CostMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CostMaintenance.aspx.designer.cs">
+      <DependentUpon>CostMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DriverBindTruck.aspx.cs">
+      <DependentUpon>DriverBindTruck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DriverBindTruck.aspx.designer.cs">
+      <DependentUpon>DriverBindTruck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DriverInfo.aspx.cs">
+      <DependentUpon>DriverInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DriverInfo.aspx.designer.cs">
+      <DependentUpon>DriverInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryCarriage.aspx.cs">
+      <DependentUpon>HistoryCarriage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HistoryCarriage.aspx.designer.cs">
+      <DependentUpon>HistoryCarriage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login1.ashx.cs">
+      <DependentUpon>Login1.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceiveCarriers.aspx.cs">
+      <DependentUpon>ReceiveCarriers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReceiveCarriers.aspx.designer.cs">
+      <DependentUpon>ReceiveCarriers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchedulingManager.aspx.cs">
+      <DependentUpon>SchedulingManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchedulingManager.aspx.designer.cs">
+      <DependentUpon>SchedulingManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchedulingTruck.aspx.cs">
+      <DependentUpon>SchedulingTruck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SchedulingTruck.aspx.designer.cs">
+      <DependentUpon>SchedulingTruck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysLog.aspx.cs">
+      <DependentUpon>SysLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysLog.aspx.designer.cs">
+      <DependentUpon>SysLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TruckInfo.aspx.cs">
+      <DependentUpon>TruckInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TruckInfo.aspx.designer.cs">
+      <DependentUpon>TruckInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TruckManager.aspx.cs">
+      <DependentUpon>TruckManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TruckManager.aspx.designer.cs">
+      <DependentUpon>TruckManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TruckTeamManager.aspx.cs">
+      <DependentUpon>TruckTeamManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TruckTeamManager.aspx.designer.cs">
+      <DependentUpon>TruckTeamManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateCarriers.aspx.cs">
+      <DependentUpon>UpdateCarriers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateCarriers.aspx.designer.cs">
+      <DependentUpon>UpdateCarriers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateDriver.aspx.cs">
+      <DependentUpon>UpdateDriver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateDriver.aspx.designer.cs">
+      <DependentUpon>UpdateDriver.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateTruck.aspx.cs">
+      <DependentUpon>UpdateTruck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateTruck.aspx.designer.cs">
+      <DependentUpon>UpdateTruck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.aspx.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserInfo.aspx.designer.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogisticsManagerBLL\LogisticsManagerBLL.csproj">
+      <Project>{972339a2-c165-427c-bead-67e6d0dd4bcc}</Project>
+      <Name>LogisticsManagerBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogisticsManagerModel\LogisticsManagerModel.csproj">
+      <Project>{21aa95f6-a17d-48a5-a8bd-fd510be76f35}</Project>
+      <Name>LogisticsManagerModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{81f25037-80fc-4839-9407-b5aeb488fa22}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56072</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56072/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
