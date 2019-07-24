@@ -1,2 +1,2 @@
 # LogisticsManager
-WebForm+SqlServer
+WebForm+Ado.Net
