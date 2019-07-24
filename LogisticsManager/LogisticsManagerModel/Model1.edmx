@@ -1,0 +1,958 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LogisticsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carriers">
+          <Key>
+            <PropertyRef Name="CarriersID" />
+          </Key>
+          <Property Name="CarriersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SendCompany" Type="varchar" MaxLength="50" />
+          <Property Name="SendAddress" Type="varchar" MaxLength="100" />
+          <Property Name="SendLinkman" Type="varchar" MaxLength="20" />
+          <Property Name="SendPhone" Type="varchar" MaxLength="20" />
+          <Property Name="ReceiveCompany" Type="varchar" MaxLength="50" />
+          <Property Name="ReceiveAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ReceiveLinkman" Type="varchar" MaxLength="20" />
+          <Property Name="ReceivePhone" Type="varchar" MaxLength="20" />
+          <Property Name="LeaverDate" Type="datetime" />
+          <Property Name="ReceiveDate" Type="datetime" />
+          <Property Name="FinishedState" Type="tinyint" Nullable="false" />
+          <Property Name="InsuranceCost" Type="float" />
+          <Property Name="TransportCost" Type="float" />
+          <Property Name="OtherCost" Type="float" />
+          <Property Name="TotalCost" Type="float" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="FK_UserID" Type="int" />
+          <Property Name="CheckInTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="tinyint" Nullable="false" />
+          <Property Name="AlterTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_TruckID" Type="int" />
+          <Property Name="FK_DriverID" Type="int" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Name="DriverID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sex" Type="tinyint" />
+          <Property Name="Birth" Type="datetime" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="IDCard" Type="varchar" MaxLength="50" />
+          <Property Name="FK_TeamID" Type="int" />
+          <Property Name="State" Type="tinyint" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="CheckInTime" Type="datetime" />
+          <Property Name="IsDelete" Type="tinyint" />
+          <Property Name="AlterTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="GoodsID" />
+          </Key>
+          <Property Name="GoodsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoodsName" Type="varchar" MaxLength="50" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="Volume" Type="float" />
+          <Property Name="FK_CarriersID" Type="int" />
+          <Property Name="IsDelete" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="LogDic">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RolePurview" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Scheduling">
+          <Key>
+            <PropertyRef Name="SchedulingID" />
+          </Key>
+          <Property Name="SchedulingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="FK_CarriersID" Type="int" />
+          <Property Name="FK_TruckID" Type="int" />
+          <Property Name="OilCost" Type="float" />
+          <Property Name="Toll" Type="float" />
+          <Property Name="Fine" Type="float" />
+          <Property Name="OtherCost" Type="float" />
+          <Property Name="TotalCost" Type="float" />
+          <Property Name="FK_UserID" Type="int" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="CheckInTime" Type="datetime" />
+          <Property Name="IsDelete" Type="tinyint" />
+          <Property Name="AlterTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Behavior" Type="varchar" MaxLength="500" />
+          <Property Name="FK_TypeID" Type="int" />
+          <Property Name="FK_UserID" Type="int" />
+          <Property Name="Parameters" Type="varchar(max)" />
+          <Property Name="ProcName" Type="varchar" MaxLength="50" />
+          <Property Name="IP" Type="varchar" MaxLength="20" />
+          <Property Name="CheckInTime" Type="datetime" />
+          <Property Name="Exception" Type="varchar(max)" />
+          <Property Name="IsException" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckID" />
+          </Key>
+          <Property Name="TruckID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BuyDate" Type="datetime" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+          <Property Name="Length" Type="varchar" MaxLength="20" />
+          <Property Name="Tonnage" Type="int" />
+          <Property Name="FK_TeamID" Type="int" />
+          <Property Name="State" Type="tinyint" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="CheckInTime" Type="datetime" />
+          <Property Name="IsDelete" Type="tinyint" Nullable="false" />
+          <Property Name="AlterTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TruckTeam">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeamName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Leader" Type="varchar" MaxLength="20" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="CheckInTime" Type="datetime" />
+          <Property Name="IsDelete" Type="tinyint" Nullable="false" />
+          <Property Name="AlterTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sex" Type="tinyint" />
+          <Property Name="Account" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="FK_RoleID" Type="int" Nullable="false" />
+          <Property Name="CheckInTime" Type="datetime" Nullable="false" />
+          <Property Name="IsDelete" Type="tinyint" Nullable="false" />
+          <Property Name="AlterTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Carriers_Carriers">
+          <End Role="Carriers" Type="Self.Carriers" Multiplicity="1" />
+          <End Role="Carriers1" Type="Self.Carriers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Carriers">
+              <PropertyRef Name="CarriersID" />
+            </Principal>
+            <Dependent Role="Carriers1">
+              <PropertyRef Name="CarriersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carriers_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Carriers" Type="Self.Carriers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Carriers">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="FK_DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Truck">
+          <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="FK_TruckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Driver_TruckTeam">
+          <End Role="TruckTeam" Type="Self.TruckTeam" Multiplicity="0..1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckTeam">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="FK_TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goods_Carriers">
+          <End Role="Carriers" Type="Self.Carriers" Multiplicity="0..1" />
+          <End Role="Goods" Type="Self.Goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carriers">
+              <PropertyRef Name="CarriersID" />
+            </Principal>
+            <Dependent Role="Goods">
+              <PropertyRef Name="FK_CarriersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheduling_Truck">
+          <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+          <End Role="Scheduling" Type="Self.Scheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckID" />
+            </Principal>
+            <Dependent Role="Scheduling">
+              <PropertyRef Name="FK_TruckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheduling_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Scheduling" Type="Self.Scheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Scheduling">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLog_LogDic">
+          <End Role="LogDic" Type="Self.LogDic" Multiplicity="0..1" />
+          <End Role="SysLog" Type="Self.SysLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogDic">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="SysLog">
+              <PropertyRef Name="FK_TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SysLog" Type="Self.SysLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SysLog">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Truck_TruckTeam">
+          <End Role="TruckTeam" Type="Self.TruckTeam" Multiplicity="0..1" />
+          <End Role="Truck" Type="Self.Truck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckTeam">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Truck">
+              <PropertyRef Name="FK_TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="FK_RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LogisticsModelStoreContainer">
+          <EntitySet Name="Carriers" EntityType="Self.Carriers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogDic" EntityType="Self.LogDic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scheduling" EntityType="Self.Scheduling" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysLog" EntityType="Self.SysLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Truck" EntityType="Self.Truck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TruckTeam" EntityType="Self.TruckTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Carriers_Carriers" Association="Self.FK_Carriers_Carriers">
+            <End Role="Carriers" EntitySet="Carriers" />
+            <End Role="Carriers1" EntitySet="Carriers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carriers_User" Association="Self.FK_Carriers_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Carriers" EntitySet="Carriers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Driver" Association="Self.FK_Contact_Driver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Truck" Association="Self.FK_Contact_Truck">
+            <End Role="Truck" EntitySet="Truck" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Driver_TruckTeam" Association="Self.FK_Driver_TruckTeam">
+            <End Role="TruckTeam" EntitySet="TruckTeam" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goods_Carriers" Association="Self.FK_Goods_Carriers">
+            <End Role="Carriers" EntitySet="Carriers" />
+            <End Role="Goods" EntitySet="Goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheduling_Truck" Association="Self.FK_Scheduling_Truck">
+            <End Role="Truck" EntitySet="Truck" />
+            <End Role="Scheduling" EntitySet="Scheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheduling_User" Association="Self.FK_Scheduling_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Scheduling" EntitySet="Scheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLog_LogDic" Association="Self.FK_SysLog_LogDic">
+            <End Role="LogDic" EntitySet="LogDic" />
+            <End Role="SysLog" EntitySet="SysLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLog_User" Association="Self.FK_SysLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SysLog" EntitySet="SysLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Truck_TruckTeam" Association="Self.FK_Truck_TruckTeam">
+            <End Role="TruckTeam" EntitySet="TruckTeam" />
+            <End Role="Truck" EntitySet="Truck" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LogisticsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carriers">
+          <Key>
+            <PropertyRef Name="CarriersID" />
+          </Key>
+          <Property Name="CarriersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SendCompany" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SendAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SendLinkman" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SendPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiveCompany" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiveAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiveLinkman" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ReceivePhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LeaverDate" Type="DateTime" Precision="3" />
+          <Property Name="ReceiveDate" Type="DateTime" Precision="3" />
+          <Property Name="FinishedState" Type="Byte" Nullable="false" />
+          <Property Name="InsuranceCost" Type="Double" />
+          <Property Name="TransportCost" Type="Double" />
+          <Property Name="OtherCost" Type="Double" />
+          <Property Name="TotalCost" Type="Double" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FK_UserID" Type="Int32" />
+          <Property Name="CheckInTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Byte" Nullable="false" />
+          <Property Name="AlterTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Carriers1" Relationship="Self.FK_Carriers_Carriers" FromRole="Carriers" ToRole="Carriers1" />
+          <NavigationProperty Name="Carriers2" Relationship="Self.FK_Carriers_Carriers" FromRole="Carriers1" ToRole="Carriers" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Carriers_User" FromRole="Carriers" ToRole="User" />
+          <NavigationProperty Name="Goods" Relationship="Self.FK_Goods_Carriers" FromRole="Carriers" ToRole="Goods" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_TruckID" Type="Int32" />
+          <Property Name="FK_DriverID" Type="Int32" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Contact_Driver" FromRole="Contact" ToRole="Driver" />
+          <NavigationProperty Name="Truck" Relationship="Self.FK_Contact_Truck" FromRole="Contact" ToRole="Truck" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverID" />
+          </Key>
+          <Property Name="DriverID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="Byte" />
+          <Property Name="Birth" Type="DateTime" Precision="3" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IDCard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_TeamID" Type="Int32" />
+          <Property Name="State" Type="Byte" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Byte" />
+          <Property Name="AlterTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_Contact_Driver" FromRole="Driver" ToRole="Contact" />
+          <NavigationProperty Name="TruckTeam" Relationship="Self.FK_Driver_TruckTeam" FromRole="Driver" ToRole="TruckTeam" />
+        </EntityType>
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="GoodsID" />
+          </Key>
+          <Property Name="GoodsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="Volume" Type="Double" />
+          <Property Name="FK_CarriersID" Type="Int32" />
+          <Property Name="IsDelete" Type="Byte" />
+          <NavigationProperty Name="Carriers" Relationship="Self.FK_Goods_Carriers" FromRole="Goods" ToRole="Carriers" />
+        </EntityType>
+        <EntityType Name="LogDic">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SysLog" Relationship="Self.FK_SysLog_LogDic" FromRole="LogDic" ToRole="SysLog" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RolePurview" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Scheduling">
+          <Key>
+            <PropertyRef Name="SchedulingID" />
+          </Key>
+          <Property Name="SchedulingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="FK_CarriersID" Type="Int32" />
+          <Property Name="FK_TruckID" Type="Int32" />
+          <Property Name="OilCost" Type="Double" />
+          <Property Name="Toll" Type="Double" />
+          <Property Name="Fine" Type="Double" />
+          <Property Name="OtherCost" Type="Double" />
+          <Property Name="TotalCost" Type="Double" />
+          <Property Name="FK_UserID" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Byte" />
+          <Property Name="AlterTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Truck" Relationship="Self.FK_Scheduling_Truck" FromRole="Scheduling" ToRole="Truck" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Scheduling_User" FromRole="Scheduling" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Behavior" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FK_TypeID" Type="Int32" />
+          <Property Name="FK_UserID" Type="Int32" />
+          <Property Name="Parameters" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProcName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IP" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInTime" Type="DateTime" Precision="3" />
+          <Property Name="Exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsException" Type="Byte" />
+          <NavigationProperty Name="LogDic" Relationship="Self.FK_SysLog_LogDic" FromRole="SysLog" ToRole="LogDic" />
+          <NavigationProperty Name="User" Relationship="Self.FK_SysLog_User" FromRole="SysLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckID" />
+          </Key>
+          <Property Name="TruckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BuyDate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Length" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tonnage" Type="Int32" />
+          <Property Name="FK_TeamID" Type="Int32" />
+          <Property Name="State" Type="Byte" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Byte" Nullable="false" />
+          <Property Name="AlterTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Contact" Relationship="Self.FK_Contact_Truck" FromRole="Truck" ToRole="Contact" />
+          <NavigationProperty Name="Scheduling" Relationship="Self.FK_Scheduling_Truck" FromRole="Truck" ToRole="Scheduling" />
+          <NavigationProperty Name="TruckTeam" Relationship="Self.FK_Truck_TruckTeam" FromRole="Truck" ToRole="TruckTeam" />
+        </EntityType>
+        <EntityType Name="TruckTeam">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Leader" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Byte" Nullable="false" />
+          <Property Name="AlterTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Driver_TruckTeam" FromRole="TruckTeam" ToRole="Driver" />
+          <NavigationProperty Name="Truck" Relationship="Self.FK_Truck_TruckTeam" FromRole="TruckTeam" ToRole="Truck" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="Byte" />
+          <Property Name="Account" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_RoleID" Type="Int32" Nullable="false" />
+          <Property Name="CheckInTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDelete" Type="Byte" Nullable="false" />
+          <Property Name="AlterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Carriers" Relationship="Self.FK_Carriers_User" FromRole="User" ToRole="Carriers" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Scheduling" Relationship="Self.FK_Scheduling_User" FromRole="User" ToRole="Scheduling" />
+          <NavigationProperty Name="SysLog" Relationship="Self.FK_SysLog_User" FromRole="User" ToRole="SysLog" />
+        </EntityType>
+        <Association Name="FK_Carriers_Carriers">
+          <End Role="Carriers" Type="Self.Carriers" Multiplicity="1" />
+          <End Role="Carriers1" Type="Self.Carriers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Carriers">
+              <PropertyRef Name="CarriersID" />
+            </Principal>
+            <Dependent Role="Carriers1">
+              <PropertyRef Name="CarriersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carriers_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Carriers" Type="Self.Carriers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Carriers">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goods_Carriers">
+          <End Role="Carriers" Type="Self.Carriers" Multiplicity="0..1" />
+          <End Role="Goods" Type="Self.Goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carriers">
+              <PropertyRef Name="CarriersID" />
+            </Principal>
+            <Dependent Role="Goods">
+              <PropertyRef Name="FK_CarriersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="FK_DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Truck">
+          <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+          <End Role="Contact" Type="Self.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckID" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="FK_TruckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Driver_TruckTeam">
+          <End Role="TruckTeam" Type="Self.TruckTeam" Multiplicity="0..1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckTeam">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="FK_TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLog_LogDic">
+          <End Role="LogDic" Type="Self.LogDic" Multiplicity="0..1" />
+          <End Role="SysLog" Type="Self.SysLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LogDic">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="SysLog">
+              <PropertyRef Name="FK_TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="FK_RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheduling_Truck">
+          <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+          <End Role="Scheduling" Type="Self.Scheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckID" />
+            </Principal>
+            <Dependent Role="Scheduling">
+              <PropertyRef Name="FK_TruckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheduling_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Scheduling" Type="Self.Scheduling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Scheduling">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysLog_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="SysLog" Type="Self.SysLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SysLog">
+              <PropertyRef Name="FK_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Truck_TruckTeam">
+          <End Role="TruckTeam" Type="Self.TruckTeam" Multiplicity="0..1" />
+          <End Role="Truck" Type="Self.Truck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckTeam">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Truck">
+              <PropertyRef Name="FK_TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LogisticsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carriers" EntityType="Self.Carriers" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" />
+          <EntitySet Name="Goods" EntityType="Self.Goods" />
+          <EntitySet Name="LogDic" EntityType="Self.LogDic" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Scheduling" EntityType="Self.Scheduling" />
+          <EntitySet Name="SysLog" EntityType="Self.SysLog" />
+          <EntitySet Name="Truck" EntityType="Self.Truck" />
+          <EntitySet Name="TruckTeam" EntityType="Self.TruckTeam" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Carriers_Carriers" Association="Self.FK_Carriers_Carriers">
+            <End Role="Carriers" EntitySet="Carriers" />
+            <End Role="Carriers1" EntitySet="Carriers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carriers_User" Association="Self.FK_Carriers_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Carriers" EntitySet="Carriers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goods_Carriers" Association="Self.FK_Goods_Carriers">
+            <End Role="Carriers" EntitySet="Carriers" />
+            <End Role="Goods" EntitySet="Goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Driver" Association="Self.FK_Contact_Driver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Truck" Association="Self.FK_Contact_Truck">
+            <End Role="Truck" EntitySet="Truck" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Driver_TruckTeam" Association="Self.FK_Driver_TruckTeam">
+            <End Role="TruckTeam" EntitySet="TruckTeam" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLog_LogDic" Association="Self.FK_SysLog_LogDic">
+            <End Role="LogDic" EntitySet="LogDic" />
+            <End Role="SysLog" EntitySet="SysLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheduling_Truck" Association="Self.FK_Scheduling_Truck">
+            <End Role="Truck" EntitySet="Truck" />
+            <End Role="Scheduling" EntitySet="Scheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheduling_User" Association="Self.FK_Scheduling_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Scheduling" EntitySet="Scheduling" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysLog_User" Association="Self.FK_SysLog_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="SysLog" EntitySet="SysLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Truck_TruckTeam" Association="Self.FK_Truck_TruckTeam">
+            <End Role="TruckTeam" EntitySet="TruckTeam" />
+            <End Role="Truck" EntitySet="Truck" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LogisticsModelStoreContainer" CdmEntityContainer="LogisticsEntities">
+          <EntitySetMapping Name="Carriers">
+            <EntityTypeMapping TypeName="LogisticsModel.Carriers">
+              <MappingFragment StoreEntitySet="Carriers">
+                <ScalarProperty Name="CarriersID" ColumnName="CarriersID" />
+                <ScalarProperty Name="SendCompany" ColumnName="SendCompany" />
+                <ScalarProperty Name="SendAddress" ColumnName="SendAddress" />
+                <ScalarProperty Name="SendLinkman" ColumnName="SendLinkman" />
+                <ScalarProperty Name="SendPhone" ColumnName="SendPhone" />
+                <ScalarProperty Name="ReceiveCompany" ColumnName="ReceiveCompany" />
+                <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+                <ScalarProperty Name="ReceiveLinkman" ColumnName="ReceiveLinkman" />
+                <ScalarProperty Name="ReceivePhone" ColumnName="ReceivePhone" />
+                <ScalarProperty Name="LeaverDate" ColumnName="LeaverDate" />
+                <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+                <ScalarProperty Name="FinishedState" ColumnName="FinishedState" />
+                <ScalarProperty Name="InsuranceCost" ColumnName="InsuranceCost" />
+                <ScalarProperty Name="TransportCost" ColumnName="TransportCost" />
+                <ScalarProperty Name="OtherCost" ColumnName="OtherCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+                <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="AlterTime" ColumnName="AlterTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contact">
+            <EntityTypeMapping TypeName="LogisticsModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="FK_TruckID" ColumnName="FK_TruckID" />
+                <ScalarProperty Name="FK_DriverID" ColumnName="FK_DriverID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Driver">
+            <EntityTypeMapping TypeName="LogisticsModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="IDCard" ColumnName="IDCard" />
+                <ScalarProperty Name="FK_TeamID" ColumnName="FK_TeamID" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="AlterTime" ColumnName="AlterTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goods">
+            <EntityTypeMapping TypeName="LogisticsModel.Goods">
+              <MappingFragment StoreEntitySet="Goods">
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="FK_CarriersID" ColumnName="FK_CarriersID" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogDic">
+            <EntityTypeMapping TypeName="LogisticsModel.LogDic">
+              <MappingFragment StoreEntitySet="LogDic">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="LogisticsModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RolePurview" ColumnName="RolePurview" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scheduling">
+            <EntityTypeMapping TypeName="LogisticsModel.Scheduling">
+              <MappingFragment StoreEntitySet="Scheduling">
+                <ScalarProperty Name="SchedulingID" ColumnName="SchedulingID" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="FK_CarriersID" ColumnName="FK_CarriersID" />
+                <ScalarProperty Name="FK_TruckID" ColumnName="FK_TruckID" />
+                <ScalarProperty Name="OilCost" ColumnName="OilCost" />
+                <ScalarProperty Name="Toll" ColumnName="Toll" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="OtherCost" ColumnName="OtherCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="AlterTime" ColumnName="AlterTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysLog">
+            <EntityTypeMapping TypeName="LogisticsModel.SysLog">
+              <MappingFragment StoreEntitySet="SysLog">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="Behavior" ColumnName="Behavior" />
+                <ScalarProperty Name="FK_TypeID" ColumnName="FK_TypeID" />
+                <ScalarProperty Name="FK_UserID" ColumnName="FK_UserID" />
+                <ScalarProperty Name="Parameters" ColumnName="Parameters" />
+                <ScalarProperty Name="ProcName" ColumnName="ProcName" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="IsException" ColumnName="IsException" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Truck">
+            <EntityTypeMapping TypeName="LogisticsModel.Truck">
+              <MappingFragment StoreEntitySet="Truck">
+                <ScalarProperty Name="TruckID" ColumnName="TruckID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="BuyDate" ColumnName="BuyDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Tonnage" ColumnName="Tonnage" />
+                <ScalarProperty Name="FK_TeamID" ColumnName="FK_TeamID" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="AlterTime" ColumnName="AlterTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TruckTeam">
+            <EntityTypeMapping TypeName="LogisticsModel.TruckTeam">
+              <MappingFragment StoreEntitySet="TruckTeam">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="Leader" ColumnName="Leader" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="AlterTime" ColumnName="AlterTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="LogisticsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FK_RoleID" ColumnName="FK_RoleID" />
+                <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="AlterTime" ColumnName="AlterTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
